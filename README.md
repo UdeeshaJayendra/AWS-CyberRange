@@ -4,7 +4,7 @@
 
 ---
 
-## 📌 Overview
+##  Overview
 
 **AWS CyberRange** is a hands-on cloud security laboratory built on **Amazon Web Services (AWS)** and provisioned using **Terraform**.
 
@@ -21,7 +21,7 @@ All security testing was performed against infrastructure owned and controlled f
 
 ---
 
-## 🎯 Objectives
+##  Objectives
 
 The main objectives of this project are to:
 
@@ -39,7 +39,7 @@ The main objectives of this project are to:
 
 ---
 
-## 🏗️ Architecture
+##  Architecture
 
 The CyberRange consists of an AWS VPC containing a public subnet and an EC2 target machine.
 
@@ -84,7 +84,7 @@ The CyberRange consists of an AWS VPC containing a public subnet and an EC2 targ
 
 ---
 
-## ☁️ AWS Services Used
+##  AWS Services Used
 
 | Service                 | Purpose                       |
 | ----------------------- | ----------------------------- |
@@ -100,7 +100,7 @@ The CyberRange consists of an AWS VPC containing a public subnet and an EC2 targ
 
 ---
 
-## 🔐 Security Design
+##  Security Design
 
 The lab was designed with security controls while still allowing controlled attack simulation.
 
@@ -116,18 +116,11 @@ The lab was designed with security controls while still allowing controlled atta
 ### SSH Access
 
 SSH access is restricted to the authorized administrator IP address.
-
-```text
-SSH (22)
-    │
-    └── Allowed only from authorized administrator CIDR
-```
-
 This allows the SSH attack simulation to be performed from the authorized testing machine while preventing unrestricted SSH exposure.
 
 ---
 
-## 🏗️ Infrastructure as Code
+##  Infrastructure as Code
 
 The AWS infrastructure is provisioned using **Terraform**.
 
@@ -157,15 +150,11 @@ terraform apply
 
 The environment can be removed after testing:
 
-```bash
-terraform destroy
-```
-
 This helps prevent unnecessary AWS resource usage and costs.
 
 ---
 
-## 🔎 Phase 1 — Network Reconnaissance
+##  Phase 1 — Network Reconnaissance
 
 After deploying the target, authorized reconnaissance was performed using **Nmap**.
 
@@ -178,10 +167,6 @@ The objective was to identify:
 
 ### Nmap Service Scan
 
-```bash
-nmap -Pn -sV <TARGET_IP>
-```
-
 The scan identified the HTTP service running on port `80`.
 
 Example result:
@@ -193,13 +178,7 @@ PORT   STATE SERVICE VERSION
 
 ### Screenshot
 
-> 📷 **Screenshot 01 — Nmap Service Scan**
->
-> Replace the placeholder below with your actual screenshot.
-
-```text
-[SCREENSHOT: docs/screenshots/01-nmap-service-scan.png]
-```
+<img width="1592" height="413" alt="01-nmap-service-scan png" src="https://github.com/user-attachments/assets/fc91e95f-9e65-4245-8238-2c5624fe00c2" />
 
 ---
 
@@ -207,21 +186,11 @@ PORT   STATE SERVICE VERSION
 
 HTTP enumeration was performed against the controlled web server.
 
-Command:
-
-```bash
-nmap -Pn -p 80 --script http-title <TARGET_IP>
-```
-
 This confirmed that the web service was reachable.
 
 ### Screenshot
+<img width="1566" height="312" alt="02-http-enumeration png" src="https://github.com/user-attachments/assets/8fd256d4-4384-474d-a681-2ea4f743a4f0" />
 
-> 📷 **Screenshot 02 — HTTP Enumeration**
-
-```text
-[SCREENSHOT: docs/screenshots/02-http-enumeration.png]
-```
 
 ---
 
@@ -237,28 +206,11 @@ fakeuser
 
 The purpose was **not to gain unauthorized access**, but to generate realistic authentication events that could be detected and investigated.
 
-Example:
-
-```bash
-ssh fakeuser@<TARGET_IP>
-```
-
-The server rejected the authentication attempt.
-
-```text
-Permission denied (publickey).
-```
-
 ---
 
 ## 📝 Authentication Evidence
 
 The SSH authentication logs recorded suspicious activity in:
-
-```text
-/var/log/auth.log
-```
-
 Example:
 
 ```text
@@ -273,11 +225,8 @@ These events provide evidence that an invalid SSH account was being used against
 
 ### Screenshot
 
-> 📷 **Screenshot 03 — SSH Attack Detection / Authentication Evidence**
+<img width="1588" height="371" alt="03-ssh-detection png" src="https://github.com/user-attachments/assets/76ecf4ac-2c6e-47bb-b2d6-35272bd452ea" />
 
-```text
-[SCREENSHOT: docs/screenshots/03-ssh-detection.png]
-```
 
 ---
 
@@ -303,13 +252,9 @@ This provides centralized visibility into activity occurring on the EC2 target.
 
 ### Screenshot
 
-> 📷 **Screenshot 04 — CloudWatch Security Logs**
+<img width="1588" height="371" alt="03-ssh-detection png" src="https://github.com/user-attachments/assets/8aa93ced-c2fd-4f9f-b107-01d4b93f9145" />
+<img width="1907" height="835" alt="08-cloudwatch-logs" src="https://github.com/user-attachments/assets/df947bc1-4b23-45f5-9463-698ee21fe889" />
 
-```text
-[SCREENSHOT: docs/screenshots/04-cloudwatch-logs.png]
-```
-
----
 
 # 🌐 Phase 5 — VPC Flow Logs
 
@@ -328,31 +273,14 @@ Flow Logs capture information such as:
 This complements host-based authentication logs by providing network-level evidence.
 
 ### Screenshot
+<img width="1906" height="707" alt="09-vpc-flow-logs" src="https://github.com/user-attachments/assets/16ecedaa-6f69-49c6-bb19-a7c3294a7710" />
 
-> 📷 **Screenshot 05 — VPC Flow Logs**
-
-```text
-[SCREENSHOT: docs/screenshots/05-vpc-flow-logs.png]
-```
-
----
 
 # 🧠 Phase 6 — SSH Detection Script
 
 A Python detection script was developed to identify suspicious SSH authentication events.
 
-Location:
-
-```text
-scripts/detect_ssh.py
-```
-
 The script searches for log entries matching:
-
-```text
-Invalid user <username> from <source_ip> port <port>
-```
-
 When a matching event is found, the script generates an alert containing:
 
 * Username
@@ -380,11 +308,7 @@ Total suspicious SSH attempts: 2
 
 ### Screenshot
 
-> 📷 **Screenshot 06 — Python SSH Detection Output**
-
-```text
-[SCREENSHOT: docs/screenshots/06-python-detection.png]
-```
+<img width="1588" height="371" alt="03-ssh-detection png" src="https://github.com/user-attachments/assets/127b86fe-cf9e-4535-8689-893559252ee3" />
 
 ---
 
@@ -445,15 +369,12 @@ Verify Defensive Control
 
 ### Screenshot
 
-> 📷 **Screenshot 07 — CloudWatch SSH Detection After Hardening**
+<img width="1598" height="237" alt="04-cloudwatch-ssh-detection-after-hardening png" src="https://github.com/user-attachments/assets/89b5d501-a160-4658-9268-711a2118646c" />
 
-```text
-[SCREENSHOT: docs/screenshots/07-cloudwatch-ssh-detection-after-hardening.png]
-```
 
 ---
 
-# 📊 Before vs After
+#  Before vs After
 
 | Security Test                 | Before Hardening            | After Hardening |
 | ----------------------------- | --------------------------- | --------------- |
@@ -470,24 +391,6 @@ The objective of hardening was not to hide the attack event. Instead, the projec
 
 ---
 
-# 🔍 Investigation Report
-
-The complete investigation is documented in:
-
-```text
-reports/ssh-attack-investigation.md
-```
-
-The report contains:
-
-* Investigation objective
-* Target information
-* Attack simulation
-* Authentication evidence
-* CloudWatch evidence
-* Detection results
-* SSH hardening
-* Retesting results
 * Final security assessment
 
 ---
@@ -497,109 +400,14 @@ The report contains:
 The project also includes screenshots showing the deployed AWS infrastructure.
 
 ### AWS VPC
+<img width="1910" height="760" alt="05-aws-vpc" src="https://github.com/user-attachments/assets/97f5e45d-f58f-4596-ba5f-1b14edc0bb93" />
 
-```text
-[SCREENSHOT: docs/screenshots/08-aws-vpc-infrastructure.png]
-```
 
 ### EC2 Target
-
-```text
-[SCREENSHOT: docs/screenshots/09-aws-ec2-target.png]
-```
+<img width="1868" height="660" alt="06-aws-ec2-target" src="https://github.com/user-attachments/assets/baf03c56-38f6-4ddc-a193-962f0165fa7f" />
 
 ### Security Group
-
-```text
-[SCREENSHOT: docs/screenshots/10-aws-security-group.png]
-```
-
-> **Note:** Keep screenshots free of sensitive credentials, access keys, private keys, or other secrets before publishing the repository.
-
----
-
-# 📁 Project Structure
-
-```text
-AWS-CyberRange/
-│
-├── .gitignore
-│
-├── docs/
-│   └── screenshots/
-│       ├── 01-nmap-service-scan.png
-│       ├── 02-http-enumeration.png
-│       ├── 03-ssh-detection.png
-│       ├── 04-cloudwatch-logs.png
-│       ├── 05-vpc-flow-logs.png
-│       ├── 06-python-detection.png
-│       ├── 07-cloudwatch-ssh-detection-after-hardening.png
-│       ├── 08-aws-vpc-infrastructure.png
-│       ├── 09-aws-ec2-target.png
-│       └── 10-aws-security-group.png
-│
-├── reports/
-│   └── ssh-attack-investigation.md
-│
-├── scenarios/
-│
-├── scripts/
-│   ├── detect_ssh.py
-│   └── ssh_events.log
-│
-└── terraform/
-    ├── main.tf
-    ├── outputs.tf
-    ├── provider.tf
-    ├── variables.tf
-    ├── terraform.tfvars.example
-    └── .terraform.lock.hcl
-```
-
----
-
-# 🧰 Technologies
-
-### Cloud
-
-* Amazon Web Services
-* Amazon EC2
-* Amazon VPC
-* Amazon CloudWatch
-* AWS Systems Manager
-* IAM
-
-### Infrastructure
-
-* Terraform
-* Infrastructure as Code
-* AWS Security Groups
-* VPC Flow Logs
-
-### Security
-
-* Nmap
-* SSH
-* Linux authentication logs
-* Security monitoring
-* Log analysis
-* SSH hardening
-* Controlled attack simulation
-
-### Programming
-
-* Python
-* Regular Expressions
-
----
-
-# 🔐 Security & Authorization
-
-This project is intended strictly for **authorized cybersecurity testing and education**.
-
-All reconnaissance, attack simulation, logging, detection, and hardening activities were performed against infrastructure controlled for this CyberRange.
-
-The techniques demonstrated in this repository should only be used against systems where explicit authorization has been granted.
+<img width="1653" height="506" alt="07-aws-security-group" src="https://github.com/user-attachments/assets/3a95dfa6-f976-4d05-8cf2-71ab2522ada8" />
 
 ---
 
@@ -626,14 +434,6 @@ This project demonstrates practical experience in:
 * Attack detection
 * Security validation and retesting
 
----
-
-10. Document the results
-```
-
-This approach provides practical experience with both **offensive security testing and defensive security operations** within a controlled cloud environment.
-
----
 
 # 👨‍💻 Author
 
