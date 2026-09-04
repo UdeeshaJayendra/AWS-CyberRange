@@ -1,0 +1,14 @@
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Terraform variables containing secrets or personal configuration
+terraform.tfvars
+*.tfvars
+!terraform.tfvars.example
+
+# Terraform plans
+*.tfplan
