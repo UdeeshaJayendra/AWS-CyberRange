@@ -252,11 +252,10 @@ This provides centralized visibility into activity occurring on the EC2 target.
 
 ### Screenshot
 
-<img width="1588" height="371" alt="03-ssh-detection png" src="https://github.com/user-attachments/assets/8aa93ced-c2fd-4f9f-b107-01d4b93f9145" />
 <img width="1907" height="835" alt="08-cloudwatch-logs" src="https://github.com/user-attachments/assets/df947bc1-4b23-45f5-9463-698ee21fe889" />
 
 
-# 🌐 Phase 5 — VPC Flow Logs
+#  Phase 5 — VPC Flow Logs
 
 VPC Flow Logs were enabled to provide network-level visibility.
 
