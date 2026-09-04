@@ -1,5 +1,16 @@
 # AWS CyberRange — Cloud Attack Simulation & Defense Lab
 
+[![AWS](https://img.shields.io/badge/AWS-Cloud-orange)](https://aws.amazon.com/)
+[![Terraform](https://img.shields.io/badge/Terraform-Infrastructure%20as%20Code-purple)](https://www.terraform.io/)
+[![Ubuntu](https://img.shields.io/badge/OS-Ubuntu-E95420)](https://ubuntu.com/)
+[![Python](https://img.shields.io/badge/Python-3.x-blue)](https://www.python.org/)
+[![Nmap](https://img.shields.io/badge/Security-Nmap-green)](https://nmap.org/)
+[![CloudWatch](https://img.shields.io/badge/Amazon-CloudWatch-blue)](https://aws.amazon.com/cloudwatch/)
+[![IAM](https://img.shields.io/badge/AWS-IAM-red)](https://aws.amazon.com/iam/)
+[![VPC](https://img.shields.io/badge/AWS-VPC-purple)](https://aws.amazon.com/vpc/)
+[![SSH](https://img.shields.io/badge/Protocol-SSH-black)](https://www.openssh.com/)
+[![Git](https://img.shields.io/badge/Git-Version%20Control-orange)](https://git-scm.com/)
+
 > An authorized AWS-based cybersecurity lab for simulating controlled attacks, collecting security evidence, detecting suspicious activity, applying defensive controls, and validating the results through retesting.
 
 ---
