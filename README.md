@@ -55,47 +55,6 @@ The main objectives of this project are to:
 The CyberRange consists of an AWS VPC containing a public subnet and an EC2 target machine.
 
 <img width="1408" height="768" alt="5" src="https://github.com/user-attachments/assets/b90f0538-4bbe-4688-a9d7-29072c0d2198" />
-
-
-```text
-                         Internet
-                            │
-                            │
-                    Authorized Tester
-                            │
-                            ▼
-                  ┌──────────────────┐
-                  │   Internet GW    │
-                  └────────┬─────────┘
-                           │
-                           ▼
-                ┌─────────────────────┐
-                │     AWS VPC         │
-                │    10.50.0.0/16     │
-                │                     │
-                │  Public Subnet      │
-                │  10.50.1.0/24       │
-                │                     │
-                │  ┌───────────────┐  │
-                │  │ EC2 Target    │  │
-                │  │ Ubuntu 24.04  │  │
-                │  │ Nginx         │  │
-                │  │ SSH           │  │
-                │  └───────┬───────┘  │
-                └──────────┼───────────┘
-                           │
-              ┌────────────┴─────────────┐
-              │                          │
-              ▼                          ▼
-       CloudWatch Logs            VPC Flow Logs
-              │
-              ▼
-       Security Investigation
-              │
-              ▼
-       Detection & Hardening
-```
-
 ---
 
 ##  AWS Services Used
