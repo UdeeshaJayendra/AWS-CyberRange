@@ -54,6 +54,9 @@ The main objectives of this project are to:
 
 The CyberRange consists of an AWS VPC containing a public subnet and an EC2 target machine.
 
+<img width="1408" height="768" alt="5" src="https://github.com/user-attachments/assets/b90f0538-4bbe-4688-a9d7-29072c0d2198" />
+
+
 ```text
                          Internet
                             │
